@@ -15,18 +15,14 @@ const images = [
 
 const gallery = document.querySelector('ul.gallery');
 
-function createListItemWithImage(src, alt) {
-  const li = document.createElement('li');
-  li.classList.add('gallery-item');
+const galleryItemsHTML = images
+  .map(
+    ({ url, alt }) => `
+  <li class="gallery-item">
+    <img src="${url}" alt="${alt}">
+  </li>
+`
+  )
+  .join('');
 
-  const img = document.createElement('img');
-  img.src = src;
-  img.alt = alt;
-  li.appendChild(img);
-  return li;
-}
-
-images.forEach((image) => {
-  const listItem = createListItemWithImage(image.url, image.alt);
-  gallery.appendChild(listItem);
-});
+gallery.insertAdjacentHTML('beforeend', galleryItemsHTML);
